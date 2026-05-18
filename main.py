@@ -1,4 +1,4 @@
-import discord  #디스코드 라이브러리 불러오기
+import discord  #디스코드 라이브러리 불러오기   (bash 터미널에서 pip install discord.py 명령어로 디코 모듈 설치 필요)
 
 import sum  #sum.py 모듈 불러오기
 import sub  #sub.py 모듈 불러오기
