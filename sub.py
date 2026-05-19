@@ -1,4 +1,4 @@
-def sub(nums):  #매개변수 nums의 원소들을 빼는 함수
+def sub(nums):  #매개변수 nums의 원소들을 빼는 함수 (str 형태의 리스트를 입력받아야 함)
     if("." in nums[0]):  #첫 번째 원소에 .(소수점)이 있다면
         total_nums = float(nums[0])  #최종값 정의 (첫 번째 원소를 실수형으로 변환)
     else:
