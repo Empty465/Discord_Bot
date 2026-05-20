@@ -1,34 +1,32 @@
-import sum  #더하기 모듈 호출
-import sub  #더하기 모듈 호출
+import sum  #항들을 더하기 위해 sum 모듈 호출
 
-def calcul(formula):    #매개변수 formula 설정 (str 형태의 리스트)
+def calcul(formula):    #str형태로 한글자씩이 원소인 리스트를 formula에 넣기
 
-    parts = []  #받은 값을 수(항)과 기호를 분리하여 보관할 리스트 생성
-    numBuffer = ""   #항 단위로 숫자만 임시로 저장할 버퍼 생성
+    parts = []  #항들만 저장할 리스트 parts 생성
+    numBuffer = ""  #임시로 항을 저장할 numBuffer 생성
 
-    for ch in formula:  #formula의 원소들을 하나씩 ch에 넣어서 반복
-        if ch in "+-−": #기호가 있을 경우 (-,−: 전자는 키보드 자판에 있는 중간 막대, 후자는 GPT가 쓰는 뺄셈 기호. 구분할 것)
-            parts.append(numBuffer)  #parts에 순서대로 numBuffer값 대입 (아래 else: numBuffer += ch에서 한 항의 숫자를 모두 받으면 추가됨)
-            parts.append(ch)    #parts에 순서대로 ch값 대입
-            numBuffer = ""   #기호가 왔기 때문에 numBuffer의 값을 없애서 다음 항의 수를 받을 준비
-        else: numBuffer += ch    #숫자가 들어올 경우, numBuffer에 추가(str이기에 두자리 이상의 숫자일 경우 필요함) (계속 숫자가 들어오면 계속 연결해서 입력되고, 기호가 오면 위의 parts.append(numBuffer)가 작동하여 parts에 한 원소로 숫자를 추가)
+    #formula 형태를 parts에 항 별로 구분하여 추가
+    for i, ch in enumerate(formula):    #formula의 원소 번호는 i, 원소 내용은 ch에 순서대로 넣어 반복
 
-    parts.append(numBuffer)  #parts에 순서대로 numBuffer값 추가 (마지막 항은 이렇게 따로 처리해야 함)
-
-    if("." in parts[0]): firstNum = float(parts[0]) #소수점이 있는 원소가 있을 경우 fistNum(계산할 앞 항)을 실수로 처리하여 실수값 대입
-    else: firstNum = int(parts[0])  #아니면 정수값으로 처리하여 정수값 대입
-
-    for i in range(1, len(parts), 2):   #첫 항(firstNum)을 건너띄고 parts의 원소들을 1칸 씩 띄어서 i 대입하며 반복 (항들 사이의 기호만 인식)
-
-        simbol = parts[i]   #i번째 parts의 원소(기호) simbol 변수에 대입 (위의 for문으로 기호만 인식하여 덧,뺄셈 기호만 들어감)
+        #+로 항 구분
+        if ch == "+":   #ch가 +면
+            parts.append(numBuffer) #numBuffer에 있던 내용(항)을 parts의 새 원소로 넣기(없다면 무시)
+            numBuffer = ""  #다음 항을 받기 위해 numBuffer 초기화
         
-        if("." in parts[i+1]): lastNum = float(parts[i + 1])  #기호 뒤에 있는 항에 소수점이 있으면 firstNum과 계산할 lastNum(계산할 뒤 항)을 실수로 처리하여 실수값 대입
-        else: lastNum = int(parts[i + 1])   #아니면 lastNum을 정수로 처리하여 정수값 대입
+        #-로 항 구분
+        elif ch in "-−": #ch가 +가 아니고 -이면 (gpt등에서 수식을 받으면 −(미들바 아님)로 받기에 이 경우도 추가)
 
-        if simbol == "+":   #simbol(기호)가 +라면
-            firstNum = sum.add([str(firstNum), str(lastNum)])   #두 항을 sum에 넣고 return된 값을 firstNum에 다시 대입하여 다음 계산 준비
+            #부호 앞에 부호가 있다면 뒤 부호도 항에 추가
+            if i == 0 or formula[i-1] in "+-":  #부호 앞에 또다른 부호가 있다면 (예: 5'+-'1)
+                numBuffer += ch #ch에 있는 해당 기호도 numBuffer에 넣어 연산자로 쓰지 않기
+            else:   #부호 앞에 부호가 없다면
+                parts.append(numBuffer) #numBuffer에 있는 항을 parts의 새 원소로 넣기
+                numBuffer = "-" #현재 항 앞에 -기호 추가
+        else:   #ch가 부호가 아니라면
+            numBuffer += ch #numBuffer에 ch(숫자) 추가
+    
+    #마지막 항은 뒤에 오는 연산자가 없기에 따로 parts에 추가 (버퍼가 비어있지 않을 때만)
+    if numBuffer != "": parts.append(numBuffer) #마지막 항을 마지막으로 parts의 새 원소로 넣기
 
-        elif simbol == "-" or simbol == "−":    #simbol(기호)가 -(또는 −)이라면
-            firstNum = sub.sub([str(firstNum), str(lastNum)])   #두 항을 sub에 넣고 return된 값을 firstNum에 다시 대입하여 다음 계산 준비
-
-    return firstNum #기호가 더이상 없다면 최종 firstNum을 return
+    #완성된 parts(예: ['5', '-1, '3.1'])를 sum 모듈에 넣어 다항식 계산
+    return sum.add(parts)   #완성된 parts에 sum 모듈에 넣어 return
