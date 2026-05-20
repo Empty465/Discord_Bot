@@ -1,4 +1,5 @@
-import re   #괄호 계산 처리를 위한 정규식 모듈 호출
+#괄호 계산 처리를 위한 정규식 모듈 호출
+import re   
 
 #문자열 변수(수식)를 받는 매개변수 formula를 계산하는 함수
 def calcul(formula):   
