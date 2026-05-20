@@ -27,6 +27,6 @@ def calcul(formula):
 
         if answer % 1 == 0: answer = int(answer)    #결과값이 .0형태의 실수라면 정수로 변환
 
-        return answer   #답 answer를 return
+        return round(answer, 5)   #답 answer를 return. round(변수, 5)는 소수점 5자리까지 남기고 반올림해서 표현
     
     except: return "계산 중 문제가 발생했습니다. (예: 어떤 수를 0으로 나누려는 경우)"  #계산 문제 발생시, 오류 메시지 return

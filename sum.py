@@ -10,4 +10,4 @@ def add(nums):
         #수 더하기
         total_nums += n #최종값에 수들을 더하기
 
-    return total_nums    #total_nums 출력(리턴)
+    return round(total_nums, 5)    #total_nums 출력(리턴). round(변수, 5)는 소수점 5자리까지 남기고 반올림해서 표현

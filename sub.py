@@ -10,4 +10,4 @@ def sub(nums):
         if("." in n): total_nums -= float(n)    #n에 .(소수점)이 있다면 n을 실수형으로 변환한 뒤에 total_nums에서 빼기
         else: total_nums -= int(n)    #아니라면 n을 정수형으로 변환하여 total_nums에서 빼기
         
-    return total_nums    #total_nums 출력(리턴)
+    return total_nums    #total_nums 출력(리턴). round(변수, 5)는 소수점 5자리까지 남기고 반올림해서 표현
