@@ -3,7 +3,7 @@ import sqlite3  #.db를 위해 sqlite3 호출
 from datetime import date   #출석 일자를 기록하기 위해 datetime의 date 클래스 호출
 
 #attendance.db 불러오기
-con_att = sqlite3.connect("attendance.db")  #attendance.db 불러와 con_att로 지정 (없으면 생성)
+con_att = sqlite3.connect("DB/attendance.db")  #attendance.db 불러와 con_att로 지정 (없으면 생성)
 curA = con_att.cursor() #con_att에 수정권한을 curA로 지정
 
 #최초생성된 attendane.db라면 해당 양식 입력

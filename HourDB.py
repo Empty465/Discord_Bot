@@ -2,7 +2,7 @@
 import sqlite3  
 
 #hours.db 불러오기
-con_hour = sqlite3.connect("hours.db")   #hours.db 연결 (없으면 생성)
+con_hour = sqlite3.connect("DB/hours.db")   #hours.db 연결 (없으면 생성)
 curH = con_hour.cursor() #hour.db 수정권한 지정
 
 #hours.db가 최초 생성된거라면 양식 검사 후, 없다면 양식 추가

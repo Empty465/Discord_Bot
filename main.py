@@ -4,7 +4,7 @@ import sum  #sum.py 모듈 불러오기
 import sub  #sub.py 모듈 불러오기
 import calcul  #calcul.py 모듈 불러오기
 import HourDB   #시수(Hour)DB 모듈 불러오기
-import AttDB    #출석(Att)DB 모듈 불러오기
+import AttDB   #출석(Att)DB 모듈 불러오기
 
 #디스코드 채팅과 반응할 수 있도록 설정
 intents = discord.Intents.all() #봇이 모든 이벤트를 받을 수 있도록 설정 (메시지, 멤버, 반응 등)
