@@ -4,11 +4,17 @@ import os
 DATA_FILE = "checklist.json"
 
 # 파일 로드
+
 def load_data():
     if not os.path.exists(DATA_FILE):
         return {}
-    with open(DATA_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+
+    try:
+        with open(DATA_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return {}
+
 
 # 파일 저장
 def save_data(data):
