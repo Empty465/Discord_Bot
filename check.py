@@ -1,10 +1,10 @@
 import json
 import os
 
-DATA_FILE = "checklist.json"
+DB_DIR = "DB"
+DATA_FILE = os.path.join(DB_DIR, "checklist.json")
 
 # 파일 로드
-
 def load_data():
     if not os.path.exists(DATA_FILE):
         return {}
